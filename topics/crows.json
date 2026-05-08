@@ -1,0 +1,122 @@
+{
+  "motion": "Should we kill crows in Singapore?",
+  "side": "FOR (Proposition)",
+  "sideExplainer": "Your job is to convince the audience that we SHOULD kill crows in Singapore. You need to give clear reasons, real examples, and reply to the other team's points.",
+
+  "facts": [
+    {
+      "title": "What kind of crows?",
+      "body": "The crows that cause problems in Singapore are mostly House Crows (Corvus splendens). They are not native — they are believed to have arrived by ship from South Asia. They are an INVASIVE species, which means they don't naturally belong here."
+    },
+    {
+      "title": "Why are people worried?",
+      "body": "House crows attack people during their nesting season (around April to June), especially when humans walk near a nest. There have been many reports of crows swooping at residents in places like Bishan, Bukit Batok and Potong Pasir."
+    },
+    {
+      "title": "What is being done already?",
+      "body": "Agencies like the National Environment Agency (NEA) and the Animal & Veterinary Service (AVS) already trap and cull crows in hotspots. Singapore has been doing this for many years to keep crow numbers down."
+    },
+    {
+      "title": "How many crows are there?",
+      "body": "In the early 2000s, the crow population in Singapore was estimated to be over 100,000. Culling and management have brought the numbers down, but they are still a problem in some neighbourhoods."
+    },
+    {
+      "title": "Why is it a health issue?",
+      "body": "Crows scavenge from rubbish bins and hawker centres. This spreads litter, attracts other pests, and can carry bacteria that affect food hygiene in public eating areas."
+    },
+    {
+      "title": "Why is it an ecology issue?",
+      "body": "Because house crows are invasive and aggressive, they push out native birds like mynas and bulbuls and can attack smaller animals. Reducing their numbers helps protect Singapore's native wildlife."
+    }
+  ],
+
+  "stakeholders": [
+    {
+      "id": "safety",
+      "title": "Public Safety",
+      "icon": "🛡️",
+      "starters": [
+        "Crows attack people during nesting season — especially children and elderly residents.",
+        "Bishan and Bukit Batok have reported many swooping incidents.",
+        "Parents should not have to worry about their children walking to school."
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Public Health",
+      "icon": "🩺",
+      "starters": [
+        "Crows scavenge rubbish and spread litter near hawker centres.",
+        "They can carry bacteria that affect food hygiene in public spaces.",
+        "More crows means more pests like rats are attracted to the same food."
+      ]
+    },
+    {
+      "id": "ecology",
+      "title": "Ecology",
+      "icon": "🌳",
+      "starters": [
+        "House crows are an INVASIVE species — they do not belong in Singapore.",
+        "They drive out native birds like mynas and bulbuls.",
+        "Protecting native wildlife means controlling invasive species."
+      ]
+    },
+    {
+      "id": "quality",
+      "title": "Quality of Life",
+      "icon": "🏠",
+      "starters": [
+        "Loud crow noise in the morning disturbs sleep, especially for shift workers.",
+        "Droppings on cars, laundry and walkways are a daily nuisance.",
+        "Residents have a right to a peaceful neighbourhood."
+      ]
+    }
+  ],
+
+  "oppositionCards": [
+    {
+      "id": "welfare",
+      "title": "It is cruel to kill animals.",
+      "claim": "Animal welfare groups argue that killing crows is inhumane and that animals have a right to live.",
+      "hint": "Acknowledge the concern first ('We agree animals matter…'), then explain that humane, targeted culling is different from cruelty. Compare it to how Singapore controls mosquitoes or stray dogs — we act because human safety and public health come first."
+    },
+    {
+      "id": "alternatives",
+      "title": "There are humane alternatives like sterilisation or relocation.",
+      "claim": "Why not just sterilise the crows or move them somewhere else?",
+      "hint": "Think about WHY these don't work in Singapore: sterilisation is hard with wild flying birds; relocation just makes them someone else's problem (or they fly back). Culling has been tried, tested, and works fastest in our small, dense city."
+    },
+    {
+      "id": "ecology",
+      "title": "Crows are part of the ecosystem.",
+      "claim": "Even crows play a role in nature — they clean up dead animals and eat pests.",
+      "hint": "House crows are NOT native to Singapore — they are an invasive species. Removing them HELPS the ecosystem because native birds can recover. This is the opposite of harming nature."
+    },
+    {
+      "id": "rootcause",
+      "title": "We should fix the root cause — like rubbish — instead.",
+      "claim": "If we managed our rubbish better, crows would have less food and the problem would solve itself.",
+      "hint": "Yes, rubbish management helps — but it is not enough on its own. Crows already nest here in huge numbers, and they will still attack people during nesting season even if bins are cleaner. We need BOTH: reduce food sources AND control the population."
+    }
+  ],
+
+  "linterKeywords": {
+    "evidenceMarkers": ["singapore", "bishan", "bukit batok", "potong pasir", "nea", "avs", "national environment agency", "house crow", "%", "100,000", "april", "may", "june", "nesting"],
+    "explanationConnectives": ["because", "this means", "this shows", "this proves", "as a result", "therefore", "so that", "which means"],
+    "linkKeywords": ["kill", "cull", "crow", "singapore", "should", "must"],
+    "absolutes": ["always", "never", "everyone", "nobody", "all people", "no one"]
+  },
+
+  "glossary": [
+    { "term": "Motion", "definition": "The statement being debated. For us: 'Should we kill crows in Singapore?'" },
+    { "term": "Proposition (For)", "definition": "The team that argues YES — we agree with the motion." },
+    { "term": "Opposition (Against)", "definition": "The team that argues NO — they disagree with the motion." },
+    { "term": "Argument", "definition": "A reason that supports your side, with proof to back it up." },
+    { "term": "Evidence", "definition": "Facts, examples, numbers, or expert sources that prove your point is true." },
+    { "term": "Rebuttal", "definition": "Your reply to the other team's argument — explaining why they are wrong or why your point is stronger." },
+    { "term": "PEEL", "definition": "A way to build a strong argument: Point → Evidence → Explanation → Link." },
+    { "term": "Stakeholder", "definition": "A group of people (or animals!) affected by an issue — like residents, NEA, or wildlife." },
+    { "term": "Invasive species", "definition": "A plant or animal that is not native and causes harm to the local environment." },
+    { "term": "Cull", "definition": "To reduce the number of animals in a group by removing some, usually because they are causing harm." }
+  ]
+}

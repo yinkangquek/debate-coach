@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debate Coach — Should we kill crows in Singapore?</title>
+  <meta name="description" content="A pedagogical debate-prep tool for upper-primary students. Topic: Should we kill crows in Singapore? (FOR the motion)" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐦%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>🪶 Debate Coach</h1>
+      <button id="glossary-toggle" class="ghost-btn" aria-expanded="false" aria-controls="glossary">📖 Glossary</button>
+    </div>
+  </header>
+
+  <aside id="glossary" class="glossary" hidden>
+    <h2>Glossary</h2>
+    <dl id="glossary-list"></dl>
+  </aside>
+
+  <nav class="stepper" aria-label="Debate steps">
+    <ol id="stepper-list"></ol>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- 1. The Motion -->
+    <section id="step-1" class="step">
+      <h2><span class="step-num">1</span> The Motion</h2>
+      <div class="motion-card" id="motion-card"></div>
+      <div class="flip-row">
+        <div class="flip-card" tabindex="0" aria-label="What is the proposition team?">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <h3>Proposition (FOR)</h3>
+              <p class="hint">Tap to learn more</p>
+            </div>
+            <div class="flip-back">
+              <p>This is <strong>your team</strong>. You argue YES — we SHOULD kill crows in Singapore. Your job: give clear reasons and strong evidence to convince the audience.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card" tabindex="0" aria-label="What is the opposition team?">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <h3>Opposition (AGAINST)</h3>
+              <p class="hint">Tap to learn more</p>
+            </div>
+            <div class="flip-back">
+              <p>The <strong>other team</strong>. They argue NO — we should NOT kill crows. You don't have to agree, but you DO need to know what they will say so you can reply.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Understand the issue -->
+    <section id="step-2" class="step">
+      <h2><span class="step-num">2</span> Understand the Issue</h2>
+      <p class="lead">Tap each card to reveal a fact about crows in Singapore. Read all of them before moving on.</p>
+      <div id="facts-grid" class="facts-grid"></div>
+    </section>
+
+    <!-- 3. Brainstorm by stakeholder -->
+    <section id="step-3" class="step">
+      <h2><span class="step-num">3</span> Brainstorm Your Angles</h2>
+      <p class="lead">A strong debater finds reasons from <strong>different angles</strong>. Pick a tab to see starter ideas, then write your own in your words.</p>
+      <div class="tabs" id="stakeholder-tabs" role="tablist"></div>
+      <div id="stakeholder-panels"></div>
+    </section>
+
+    <!-- 4. Build a PEEL argument -->
+    <section id="step-4" class="step">
+      <h2><span class="step-num">4</span> Build a PEEL Argument</h2>
+      <p class="lead">Use the PEEL framework to turn an idea into a strong argument.</p>
+
+      <div class="peel-grid">
+        <label class="peel-box">
+          <span class="peel-label">P — <strong>Point</strong></span>
+          <span class="peel-help">State your main reason in ONE clear sentence.</span>
+          <textarea id="peel-p" rows="2" placeholder="We should kill crows in Singapore because…"></textarea>
+        </label>
+
+        <label class="peel-box">
+          <span class="peel-label">E — <strong>Evidence</strong></span>
+          <span class="peel-help">Back it up with a fact, number, place, or example.</span>
+          <textarea id="peel-e1" rows="3" placeholder="For example, in Bishan in 2019, NEA…"></textarea>
+        </label>
+
+        <label class="peel-box">
+          <span class="peel-label">E — <strong>Explanation</strong></span>
+          <span class="peel-help">Tell the audience why your evidence matters. Try starting with "This means…" or "This shows…".</span>
+          <textarea id="peel-e2" rows="3" placeholder="This means that…"></textarea>
+        </label>
+
+        <label class="peel-box">
+          <span class="peel-label">L — <strong>Link</strong></span>
+          <span class="peel-help">End by linking back to the motion. Use words like "kill", "crows", "Singapore".</span>
+          <textarea id="peel-l" rows="2" placeholder="Therefore, we should kill crows in Singapore because…"></textarea>
+        </label>
+      </div>
+
+      <div class="action-row">
+        <button id="check-argument" class="primary-btn">✅ Check My Argument</button>
+        <button id="save-argument" class="primary-btn ghost">💾 Save Argument</button>
+        <button id="clear-argument" class="ghost-btn">🗑 Clear</button>
+      </div>
+
+      <div id="linter-output" class="linter-output" aria-live="polite"></div>
+
+      <h3>Your saved arguments</h3>
+      <ul id="saved-arguments" class="saved-list" aria-live="polite"></ul>
+    </section>
+
+    <!-- 5. Anticipate the opposition -->
+    <section id="step-5" class="step">
+      <h2><span class="step-num">5</span> Anticipate the Opposition</h2>
+      <p class="lead">The other team will try to argue against you. If you know what they will say, you can prepare your reply (called a <strong>rebuttal</strong>).</p>
+      <div id="opposition-cards" class="opposition-cards"></div>
+    </section>
+
+    <!-- 6. Practice -->
+    <section id="step-6" class="step">
+      <h2><span class="step-num">6</span> Practice Your Speech</h2>
+      <p class="lead">Here is the speech outline built from everything you wrote. Read it out loud, time yourself, or ask the computer to read it back to you.</p>
+
+      <article id="speech-outline" class="speech-outline">
+        <p class="muted">Save at least one PEEL argument in Step 4 to see your outline here.</p>
+      </article>
+
+      <div class="action-row">
+        <button id="speak-btn" class="primary-btn">🔊 Read Aloud</button>
+        <button id="stop-speak-btn" class="ghost-btn">⏹ Stop</button>
+        <button id="print-btn" class="ghost-btn">🖨 Print</button>
+      </div>
+
+      <div class="timer-row">
+        <h3>Practice timer</h3>
+        <div class="timer-buttons">
+          <button class="timer-btn" data-seconds="60">1 min</button>
+          <button class="timer-btn" data-seconds="90">1 min 30</button>
+          <button class="timer-btn" data-seconds="120">2 min</button>
+          <button id="timer-stop" class="ghost-btn">Reset</button>
+        </div>
+        <div id="timer-display" class="timer-display">00:00</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Made for learning · No data leaves your browser. <button id="reset-all" class="link-btn">Reset all my work</button></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
