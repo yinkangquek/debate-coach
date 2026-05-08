@@ -65,6 +65,95 @@ async function boot() {
   wireGlossaryToggle();
   wireResetAll();
   wireFlipCards();
+  wireMascotTip();
+  updateProgress();
+  showMascotTip(`Hi! I'm Cawie 🐦 — your debate coach. Tap each step to explore. You've got this!`, 5000);
+}
+
+// --- Progress + mascot tips ---------------------------------------------
+
+function updateProgress() {
+  // 6 steps, mark each as "done" based on simple heuristics
+  const factsRevealed = document.querySelectorAll('.fact-card.revealed').length;
+  const totalFacts = (state.topic && state.topic.facts) ? state.topic.facts.length : 6;
+  const stakeholderCount = Object.values(state.stakeholderNotes).filter(v => v && v.trim().length > 5).length;
+  const argCount = state.savedArguments.length;
+  const rebuttalCount = Object.values(state.rebuttals).filter(v => v && v.trim().length > 5).length;
+
+  const stepsDone = [
+    true,                                 // 1: motion (always shown)
+    factsRevealed >= Math.min(3, totalFacts),  // 2: read at least 3 facts
+    stakeholderCount >= 1,                // 3: wrote at least 1 angle
+    argCount >= 1,                        // 4: saved at least 1 PEEL argument
+    rebuttalCount >= 1,                   // 5: wrote at least 1 rebuttal
+    argCount >= 2                         // 6: practice (proxy: 2+ args)
+  ];
+
+  const total = stepsDone.length;
+  const done = stepsDone.filter(Boolean).length;
+  const pct = Math.round((done / total) * 100);
+
+  const fill = $('#progress-fill');
+  const label = $('#progress-label');
+  if (fill) fill.style.width = `${pct}%`;
+  if (label) label.textContent = `${pct}% adventure complete`;
+  $('.progress-track')?.setAttribute('aria-valuenow', String(pct));
+
+  // Update step badges + stepper
+  document.querySelectorAll('.step').forEach(sec => {
+    const idx = parseInt(sec.dataset.step, 10) - 1;
+    sec.classList.toggle('done', !!stepsDone[idx]);
+  });
+  document.querySelectorAll('#stepper-list a').forEach((a, i) => {
+    a.classList.toggle('done', !!stepsDone[i]);
+  });
+
+  // Update facts progress text
+  const fp = $('#facts-progress');
+  if (fp) fp.textContent = `${factsRevealed} of ${totalFacts} facts revealed`;
+
+  return { stepsDone, pct };
+}
+
+let mascotTimer = null;
+function showMascotTip(text, durationMs = 4500) {
+  const tip = $('#mascot-tip');
+  const txt = $('#mascot-tip-text');
+  if (!tip || !txt) return;
+  txt.textContent = text;
+  tip.hidden = false;
+  clearTimeout(mascotTimer);
+  if (durationMs > 0) {
+    mascotTimer = setTimeout(() => { tip.hidden = true; }, durationMs);
+  }
+}
+
+function wireMascotTip() {
+  $('#mascot-close')?.addEventListener('click', () => {
+    $('#mascot-tip').hidden = true;
+    clearTimeout(mascotTimer);
+  });
+}
+
+// --- Confetti -----------------------------------------------------------
+
+function celebrate() {
+  const colors = ['#7c3aed', '#ec4899', '#fb7185', '#fbbf24', '#34d399', '#38bdf8'];
+  const container = $('#confetti');
+  if (!container) return;
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = `${Math.random() * 100}vw`;
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDuration = `${2 + Math.random() * 2}s`;
+    piece.style.animationDelay = `${Math.random() * 0.4}s`;
+    piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+    piece.style.width = `${6 + Math.random() * 8}px`;
+    piece.style.height = `${10 + Math.random() * 10}px`;
+    container.appendChild(piece);
+    setTimeout(() => piece.remove(), 4500);
+  }
 }
 
 // --- Stepper -------------------------------------------------------------
@@ -129,6 +218,7 @@ function toggleFact(card) {
   card.classList.toggle('revealed');
   const prompt = card.querySelector('.fact-prompt');
   prompt.textContent = card.classList.contains('revealed') ? 'Tap to hide' : 'Tap to reveal';
+  updateProgress();
 }
 
 // --- Section 3: Stakeholders --------------------------------------------
@@ -170,6 +260,7 @@ function renderStakeholders() {
     if (!ta) return;
     state.stakeholderNotes[ta.dataset.stakeholder] = ta.value;
     save();
+    updateProgress();
     const status = panels.querySelector(`[data-saved-for="${ta.dataset.stakeholder}"]`);
     if (status) {
       status.textContent = '✓ Saved';
@@ -282,6 +373,11 @@ function runLinter() {
         : `${goodCount} of ${checks.length} checks passed. Try the suggestions above and check again!`}
     </div>
   `;
+
+  if (goodCount === checks.length) {
+    celebrate();
+    showMascotTip("Wow — all 5 checks passed! Save this argument before you forget! 💾", 5000);
+  }
 }
 
 function saveArgument() {
@@ -298,15 +394,18 @@ function saveArgument() {
   save();
   renderSavedArguments();
   renderSpeechOutline();
+  updateProgress();
   setPeelInputs();
   $('#linter-output').innerHTML =
     '<div class="lint-summary all-good">💾 Saved! Scroll down to see it in your list, or build another argument.</div>';
+  celebrate();
+  showMascotTip(`Awesome! That's argument #${state.savedArguments.length} saved. Keep building! 🌟`, 4000);
 }
 
 function renderSavedArguments() {
   const list = $('#saved-arguments');
   if (!state.savedArguments.length) {
-    list.innerHTML = '<li style="background:transparent;border:none;color:var(--ink-soft);font-style:italic">No saved arguments yet.</li>';
+    list.innerHTML = '<li class="empty">No saved arguments yet — build one above! 👆</li>';
     return;
   }
   list.innerHTML = state.savedArguments.map((a, i) => `
@@ -368,6 +467,7 @@ function renderOpposition() {
     state.rebuttals[ta.dataset.opInput] = ta.value;
     save();
     renderSpeechOutline();
+    updateProgress();
   });
   root.addEventListener('click', e => {
     const btn = e.target.closest('button[data-op-hint]');

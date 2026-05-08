@@ -3,21 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Debate Coach — Should we kill crows in Singapore?</title>
-  <meta name="description" content="A pedagogical debate-prep tool for upper-primary students. Topic: Should we kill crows in Singapore? (FOR the motion)" />
+  <title>Debate Coach 🐦 Should we kill crows in Singapore?</title>
+  <meta name="description" content="A playful, pedagogical debate-prep tool for upper-primary students. Topic: Should we kill crows in Singapore? (FOR the motion)" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐦%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
+
+  <!-- Floating decorative blobs -->
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+
   <header class="site-header">
-    <div class="wrap">
-      <h1>🪶 Debate Coach</h1>
+    <div class="wrap header-wrap">
+      <div class="brand">
+        <!-- Crow mascot SVG -->
+        <svg class="crow-mascot" viewBox="0 0 120 120" aria-hidden="true">
+          <defs>
+            <radialGradient id="bodyGrad" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#4c1d95"/>
+              <stop offset="100%" stop-color="#1e1b4b"/>
+            </radialGradient>
+          </defs>
+          <!-- Body -->
+          <ellipse cx="60" cy="78" rx="36" ry="30" fill="url(#bodyGrad)"/>
+          <!-- Wing -->
+          <ellipse cx="78" cy="80" rx="20" ry="22" fill="#1e1b4b" opacity="0.9" transform="rotate(15 78 80)"/>
+          <!-- Tail -->
+          <path d="M88 90 L108 80 L102 95 Z" fill="#1e1b4b"/>
+          <!-- Head -->
+          <circle cx="55" cy="42" r="26" fill="url(#bodyGrad)"/>
+          <!-- Eye whites -->
+          <circle cx="48" cy="38" r="8" fill="#fef3c7"/>
+          <circle cx="66" cy="38" r="8" fill="#fef3c7"/>
+          <!-- Pupils -->
+          <circle cx="50" cy="40" r="4" fill="#1e1b4b"/>
+          <circle cx="68" cy="40" r="4" fill="#1e1b4b"/>
+          <!-- Highlight -->
+          <circle cx="51" cy="38" r="1.5" fill="white"/>
+          <circle cx="69" cy="38" r="1.5" fill="white"/>
+          <!-- Beak -->
+          <path d="M30 44 L45 42 L45 50 Z" fill="#fb923c"/>
+          <path d="M30 44 L45 46 L45 50 Z" fill="#ea580c"/>
+          <!-- Cheeks -->
+          <circle cx="42" cy="50" r="4" fill="#fb7185" opacity="0.4"/>
+          <circle cx="74" cy="50" r="4" fill="#fb7185" opacity="0.4"/>
+        </svg>
+        <div>
+          <h1>Debate Coach</h1>
+          <p class="brand-tagline">Your sidekick for winning debates</p>
+        </div>
+      </div>
       <button id="glossary-toggle" class="ghost-btn" aria-expanded="false" aria-controls="glossary">📖 Glossary</button>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-wrap">
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <span class="progress-label" id="progress-label">0% adventure complete</span>
     </div>
   </header>
 
   <aside id="glossary" class="glossary" hidden>
-    <h2>Glossary</h2>
+    <h2>📖 Words to Know</h2>
     <dl id="glossary-list"></dl>
   </aside>
 
@@ -25,107 +79,163 @@
     <ol id="stepper-list"></ol>
   </nav>
 
+  <!-- Mascot speech bubble -->
+  <div class="mascot-tip" id="mascot-tip" hidden>
+    <button class="mascot-close" id="mascot-close" aria-label="Close tip">×</button>
+    <p id="mascot-tip-text"></p>
+  </div>
+
   <main class="wrap">
 
     <!-- 1. The Motion -->
-    <section id="step-1" class="step">
-      <h2><span class="step-num">1</span> The Motion</h2>
+    <section id="step-1" class="step" data-step="1">
+      <div class="step-header">
+        <span class="step-badge">Step 1</span>
+        <h2>🎯 The Motion</h2>
+      </div>
       <div class="motion-card" id="motion-card"></div>
       <div class="flip-row">
         <div class="flip-card" tabindex="0" aria-label="What is the proposition team?">
           <div class="flip-inner">
-            <div class="flip-front">
-              <h3>Proposition (FOR)</h3>
-              <p class="hint">Tap to learn more</p>
+            <div class="flip-front prop">
+              <span class="flip-emoji">✅</span>
+              <h3>Proposition</h3>
+              <p>(FOR the motion)</p>
+              <p class="hint">Tap to flip!</p>
             </div>
-            <div class="flip-back">
-              <p>This is <strong>your team</strong>. You argue YES — we SHOULD kill crows in Singapore. Your job: give clear reasons and strong evidence to convince the audience.</p>
+            <div class="flip-back prop">
+              <p>This is <strong>your team</strong>! You argue YES — we SHOULD kill crows in Singapore. Your job: give clear reasons and strong evidence.</p>
             </div>
           </div>
         </div>
         <div class="flip-card" tabindex="0" aria-label="What is the opposition team?">
           <div class="flip-inner">
-            <div class="flip-front">
-              <h3>Opposition (AGAINST)</h3>
-              <p class="hint">Tap to learn more</p>
+            <div class="flip-front opp">
+              <span class="flip-emoji">❌</span>
+              <h3>Opposition</h3>
+              <p>(AGAINST the motion)</p>
+              <p class="hint">Tap to flip!</p>
             </div>
-            <div class="flip-back">
-              <p>The <strong>other team</strong>. They argue NO — we should NOT kill crows. You don't have to agree, but you DO need to know what they will say so you can reply.</p>
+            <div class="flip-back opp">
+              <p>The <strong>other team</strong>. They argue NO — we should NOT kill crows. Knowing what they will say helps you reply!</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d="M0,40 Q300,80 600,40 T1200,40 L1200,80 L0,80 Z"></path></svg>
+    </div>
+
     <!-- 2. Understand the issue -->
-    <section id="step-2" class="step">
-      <h2><span class="step-num">2</span> Understand the Issue</h2>
-      <p class="lead">Tap each card to reveal a fact about crows in Singapore. Read all of them before moving on.</p>
+    <section id="step-2" class="step" data-step="2">
+      <div class="step-header">
+        <span class="step-badge">Step 2</span>
+        <h2>🔍 Understand the Issue</h2>
+      </div>
+      <p class="lead">Tap each card to flip it and reveal a fact about crows in Singapore. Try to read all of them! 👇</p>
       <div id="facts-grid" class="facts-grid"></div>
+      <div class="step-progress" id="facts-progress">0 of 6 facts revealed</div>
     </section>
 
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d="M0,40 Q300,80 600,40 T1200,40 L1200,80 L0,80 Z"></path></svg>
+    </div>
+
     <!-- 3. Brainstorm by stakeholder -->
-    <section id="step-3" class="step">
-      <h2><span class="step-num">3</span> Brainstorm Your Angles</h2>
-      <p class="lead">A strong debater finds reasons from <strong>different angles</strong>. Pick a tab to see starter ideas, then write your own in your words.</p>
+    <section id="step-3" class="step" data-step="3">
+      <div class="step-header">
+        <span class="step-badge">Step 3</span>
+        <h2>💡 Brainstorm Your Angles</h2>
+      </div>
+      <p class="lead">Strong debaters find reasons from <strong>different angles</strong>. Pick a tab to see starter ideas, then write your own!</p>
       <div class="tabs" id="stakeholder-tabs" role="tablist"></div>
       <div id="stakeholder-panels"></div>
     </section>
 
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d="M0,40 Q300,80 600,40 T1200,40 L1200,80 L0,80 Z"></path></svg>
+    </div>
+
     <!-- 4. Build a PEEL argument -->
-    <section id="step-4" class="step">
-      <h2><span class="step-num">4</span> Build a PEEL Argument</h2>
-      <p class="lead">Use the PEEL framework to turn an idea into a strong argument.</p>
+    <section id="step-4" class="step" data-step="4">
+      <div class="step-header">
+        <span class="step-badge">Step 4</span>
+        <h2>🏗️ Build a PEEL Argument</h2>
+      </div>
+      <p class="lead">Use the <strong>PEEL</strong> framework to turn an idea into a powerful argument!</p>
+
+      <div class="peel-legend">
+        <span class="peel-pill p-pill">P</span>oint &nbsp;→&nbsp;
+        <span class="peel-pill e-pill">E</span>vidence &nbsp;→&nbsp;
+        <span class="peel-pill e-pill">E</span>xplanation &nbsp;→&nbsp;
+        <span class="peel-pill l-pill">L</span>ink
+      </div>
 
       <div class="peel-grid">
-        <label class="peel-box">
-          <span class="peel-label">P — <strong>Point</strong></span>
+        <label class="peel-box p-box">
+          <span class="peel-label"><span class="peel-pill p-pill">P</span> Point</span>
           <span class="peel-help">State your main reason in ONE clear sentence.</span>
           <textarea id="peel-p" rows="2" placeholder="We should kill crows in Singapore because…"></textarea>
         </label>
 
-        <label class="peel-box">
-          <span class="peel-label">E — <strong>Evidence</strong></span>
+        <label class="peel-box e-box">
+          <span class="peel-label"><span class="peel-pill e-pill">E</span> Evidence</span>
           <span class="peel-help">Back it up with a fact, number, place, or example.</span>
           <textarea id="peel-e1" rows="3" placeholder="For example, in Bishan in 2019, NEA…"></textarea>
         </label>
 
-        <label class="peel-box">
-          <span class="peel-label">E — <strong>Explanation</strong></span>
-          <span class="peel-help">Tell the audience why your evidence matters. Try starting with "This means…" or "This shows…".</span>
+        <label class="peel-box e-box">
+          <span class="peel-label"><span class="peel-pill e-pill">E</span> Explanation</span>
+          <span class="peel-help">Tell the audience why this matters. Try "This means…" or "This shows…"</span>
           <textarea id="peel-e2" rows="3" placeholder="This means that…"></textarea>
         </label>
 
-        <label class="peel-box">
-          <span class="peel-label">L — <strong>Link</strong></span>
-          <span class="peel-help">End by linking back to the motion. Use words like "kill", "crows", "Singapore".</span>
+        <label class="peel-box l-box">
+          <span class="peel-label"><span class="peel-pill l-pill">L</span> Link</span>
+          <span class="peel-help">Link back to the motion. Use words like "kill", "crows", "Singapore".</span>
           <textarea id="peel-l" rows="2" placeholder="Therefore, we should kill crows in Singapore because…"></textarea>
         </label>
       </div>
 
       <div class="action-row">
-        <button id="check-argument" class="primary-btn">✅ Check My Argument</button>
+        <button id="check-argument" class="primary-btn">✨ Check My Argument</button>
         <button id="save-argument" class="primary-btn ghost">💾 Save Argument</button>
         <button id="clear-argument" class="ghost-btn">🗑 Clear</button>
       </div>
 
       <div id="linter-output" class="linter-output" aria-live="polite"></div>
 
-      <h3>Your saved arguments</h3>
+      <h3 class="saved-heading">🌟 Your Saved Arguments</h3>
       <ul id="saved-arguments" class="saved-list" aria-live="polite"></ul>
     </section>
 
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d="M0,40 Q300,80 600,40 T1200,40 L1200,80 L0,80 Z"></path></svg>
+    </div>
+
     <!-- 5. Anticipate the opposition -->
-    <section id="step-5" class="step">
-      <h2><span class="step-num">5</span> Anticipate the Opposition</h2>
-      <p class="lead">The other team will try to argue against you. If you know what they will say, you can prepare your reply (called a <strong>rebuttal</strong>).</p>
+    <section id="step-5" class="step" data-step="5">
+      <div class="step-header">
+        <span class="step-badge">Step 5</span>
+        <h2>🛡️ Anticipate the Opposition</h2>
+      </div>
+      <p class="lead">The other team will fight back! If you guess what they'll say, you can prepare a <strong>rebuttal</strong>. ⚔️</p>
       <div id="opposition-cards" class="opposition-cards"></div>
     </section>
 
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 80" preserveAspectRatio="none"><path d="M0,40 Q300,80 600,40 T1200,40 L1200,80 L0,80 Z"></path></svg>
+    </div>
+
     <!-- 6. Practice -->
-    <section id="step-6" class="step">
-      <h2><span class="step-num">6</span> Practice Your Speech</h2>
-      <p class="lead">Here is the speech outline built from everything you wrote. Read it out loud, time yourself, or ask the computer to read it back to you.</p>
+    <section id="step-6" class="step" data-step="6">
+      <div class="step-header">
+        <span class="step-badge">Step 6</span>
+        <h2>🎤 Practice Your Speech</h2>
+      </div>
+      <p class="lead">Here's the speech outline built from your work. Read it aloud, time yourself, or have the computer read it back to you!</p>
 
       <article id="speech-outline" class="speech-outline">
         <p class="muted">Save at least one PEEL argument in Step 4 to see your outline here.</p>
@@ -138,12 +248,12 @@
       </div>
 
       <div class="timer-row">
-        <h3>Practice timer</h3>
+        <h3>⏱ Practice Timer</h3>
         <div class="timer-buttons">
           <button class="timer-btn" data-seconds="60">1 min</button>
-          <button class="timer-btn" data-seconds="90">1 min 30</button>
+          <button class="timer-btn" data-seconds="90">1m 30s</button>
           <button class="timer-btn" data-seconds="120">2 min</button>
-          <button id="timer-stop" class="ghost-btn">Reset</button>
+          <button id="timer-stop" class="ghost-btn">↺ Reset</button>
         </div>
         <div id="timer-display" class="timer-display">00:00</div>
       </div>
@@ -152,8 +262,12 @@
   </main>
 
   <footer class="site-footer">
-    <p>Made for learning · No data leaves your browser. <button id="reset-all" class="link-btn">Reset all my work</button></p>
+    <p>Made with 💜 for learning · Nothing leaves your browser</p>
+    <button id="reset-all" class="link-btn">Reset all my work</button>
   </footer>
+
+  <!-- Confetti container -->
+  <div id="confetti" class="confetti-container" aria-hidden="true"></div>
 
   <script src="app.js"></script>
 </body>
