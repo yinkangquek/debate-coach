@@ -58,7 +58,24 @@
           <p class="brand-tagline">Your sidekick for winning debates</p>
         </div>
       </div>
-      <button id="glossary-toggle" class="ghost-btn" aria-expanded="false" aria-controls="glossary">📖 Glossary</button>
+      <div class="header-actions">
+        <div class="topic-switcher">
+          <button id="topic-name-btn" class="ghost-btn" aria-haspopup="true" aria-expanded="false">
+            <span class="topic-icon">🎯</span>
+            <span id="current-topic-name" class="topic-name">—</span>
+            <span class="topic-caret">▾</span>
+          </button>
+          <div id="topic-menu" class="topic-menu" hidden>
+            <p class="topic-menu-label">Switch topic</p>
+            <ul id="topic-list"></ul>
+            <hr>
+            <button id="new-topic-btn">✨ Create new topic</button>
+            <button id="edit-topic-btn">✏️ Edit current topic</button>
+            <button id="load-example-btn">📚 Load crows example</button>
+          </div>
+        </div>
+        <button id="glossary-toggle" class="ghost-btn" aria-expanded="false" aria-controls="glossary">📖 Glossary</button>
+      </div>
     </div>
 
     <!-- Progress bar -->
@@ -265,6 +282,63 @@
     <p>Made with 💜 for learning · Nothing leaves your browser</p>
     <button id="reset-all" class="link-btn">Reset all my work</button>
   </footer>
+
+  <!-- Topic create/edit modal -->
+  <div id="topic-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button id="modal-close" class="modal-close" aria-label="Close">×</button>
+      <h2 id="modal-title">✨ Create a debate topic</h2>
+      <p class="modal-lead">Tip: you only need to fill in the <strong>motion</strong> and your <strong>side</strong> to get started. You can add facts, angles, and counter-arguments any time later. 🌟</p>
+
+      <label class="modal-field">
+        <span class="modal-label">🎯 What is the motion (the question being debated)?</span>
+        <input id="t-motion" type="text" placeholder="e.g. Should we ban smartphones in primary schools?" autocomplete="off">
+      </label>
+
+      <fieldset class="modal-field side-picker">
+        <legend class="modal-label">🛡 Which side will you argue?</legend>
+        <label class="side-option">
+          <input id="t-side-for" type="radio" name="t-side" value="FOR" checked>
+          <span class="side-card prop">
+            <span class="side-emoji">✅</span>
+            <strong>FOR</strong>
+            <span>(Proposition — argue YES)</span>
+          </span>
+        </label>
+        <label class="side-option">
+          <input id="t-side-against" type="radio" name="t-side" value="AGAINST">
+          <span class="side-card opp">
+            <span class="side-emoji">❌</span>
+            <strong>AGAINST</strong>
+            <span>(Opposition — argue NO)</span>
+          </span>
+        </label>
+      </fieldset>
+
+      <details class="modal-section">
+        <summary>📚 Add facts about this issue <span class="modal-optional">(optional — you can add later)</span></summary>
+        <div id="t-facts-list" class="dyn-list"></div>
+        <button id="t-add-fact" class="ghost-btn small">+ Add a fact</button>
+      </details>
+
+      <details class="modal-section">
+        <summary>💡 Add angles / stakeholders <span class="modal-optional">(optional)</span></summary>
+        <div id="t-stakeholders-list" class="dyn-list"></div>
+        <button id="t-add-stakeholder" class="ghost-btn small">+ Add an angle</button>
+      </details>
+
+      <details class="modal-section">
+        <summary>⚔️ Add opposition counter-arguments <span class="modal-optional">(optional)</span></summary>
+        <div id="t-opposition-list" class="dyn-list"></div>
+        <button id="t-add-opposition" class="ghost-btn small">+ Add a counter-argument</button>
+      </details>
+
+      <div class="modal-actions">
+        <button id="t-save" class="primary-btn">💾 Save topic</button>
+        <button id="t-cancel" class="ghost-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Confetti container -->
   <div id="confetti" class="confetti-container" aria-hidden="true"></div>

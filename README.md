@@ -1,10 +1,17 @@
 # Debate Coach
 
-A small, pedagogically-aligned web app for upper-primary (P5–P6) students preparing for a debate.
+A small, pedagogically-aligned web app for upper-primary (P5–P6) students preparing for a debate. Bring **any motion** — the site walks the student through a structured prep workflow.
 
 **Live site:** https://yinkangquek.github.io/debate-coach/
 
-**Current topic:** *Should we kill crows in Singapore?* — arguing FOR the motion (proposition).
+**Built-in example:** *Should we kill crows in Singapore?* — arguing FOR the motion. Loadable from the topic switcher, fully editable, or skippable in favour of a custom topic.
+
+## Topics
+
+- On first visit, the student picks **"Try the example"** (loads the crows topic) or **"Create my own topic"** (opens a friendly setup form).
+- The setup form needs only the **motion** and her **side** to get started; she can add facts, stakeholder angles, and likely opposition counter-arguments at any time using the **✏️ Edit current topic** option.
+- Multiple topics can be saved on the same device. Use the topic switcher in the header to flip between them. Each topic keeps its own arguments, rebuttals, and notes.
+- The linter's "link to motion" check auto-derives keywords from the motion text, so the strength check works for any topic.
 
 ## What it does
 
